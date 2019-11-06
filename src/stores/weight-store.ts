@@ -1,50 +1,46 @@
-import { observable, action } from "mobx";
+import { observable, action, IObservableArray, runInAction } from "mobx";
 import uuidGenerator from "../helpers/uuid-generator";
-
-export class WeightRecord {
-  id: string;
-  @observable weight: number;
-  @observable registrationDate: Date;
-}
+import { WeightRecord } from "../WeightRecord";
+import { ITransportService } from "../services/transport-service";
 
 export class WeightStore {
-  public readonly weightRecords = observable<WeightRecord>([
-    {
-      id: "ksk1",
-      weight: 90,
-      registrationDate: new Date(2014, 10, 15, 0, 30)
-    },
-    {
-      id: "ksks2",
-      weight: 40,
-      registrationDate: new Date(2015, 10, 15, 0, 30)
-    },
-    {
-      id: "ksk3s",
-      weight: 50,
-      registrationDate: new Date(2016, 10, 15, 0, 30)
-    }
-  ]);
+  constructor(private readonly transportationLayer: ITransportService) {
+    transportationLayer.list().then(data => this.weightRecords.replace(data));
+  }
+  @observable
+  public weightRecords: IObservableArray<WeightRecord> = observable<
+    WeightRecord
+  >([]);
 
   @action.bound
-  public addMeasurement(weight: number, date: Date) {
-    this.weightRecords.push({
+  public async addMeasurement(weight: number, date: Date) {
+    const newRecord: WeightRecord = {
       weight,
       registrationDate: date,
       id: uuidGenerator()
-    });
+    };
+    await this.transportationLayer.add(newRecord);
+    this.weightRecords.push(newRecord);
   }
 
   @action.bound
-  public removeMeasurement(id: string) {
+  public async removeMeasurement(id: string) {
+    await this.transportationLayer.remove(id);
     const itemForRemoving = this.weightRecords.find(x => x.id === id);
     this.weightRecords.remove(itemForRemoving);
   }
 
   @action.bound
-  public editMeasurement(newRecord: WeightRecord) {
-    const itemForEditing = this.weightRecords.find(x => x.id === newRecord.id);
-    itemForEditing.weight = newRecord.weight;
-    itemForEditing.registrationDate = newRecord.registrationDate;
+  public async editMeasurement(newRecord: WeightRecord) {
+    await this.transportationLayer.edit(
+      newRecord.id,
+      newRecord.weight,
+      newRecord.registrationDate
+    );
+
+    const editingItemIndex = this.weightRecords.findIndex(
+      x => x.id === newRecord.id
+    );
+    this.weightRecords[editingItemIndex] = newRecord;
   }
 }

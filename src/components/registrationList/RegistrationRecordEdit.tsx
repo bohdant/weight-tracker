@@ -6,7 +6,7 @@ import {
   IconButton,
   Divider
 } from "@material-ui/core";
-import { WeightRecord } from "../../stores/weight-store";
+import { WeightRecord } from "../../WeightRecord";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import DoneIcon from "@material-ui/icons/Done";

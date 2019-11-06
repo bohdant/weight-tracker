@@ -13,7 +13,7 @@ import {
   Speed as SpeedIcon,
   Edit as EditIcon
 } from "@material-ui/icons";
-import { WeightRecord } from "../../stores/weight-store";
+import { WeightRecord } from "../../WeightRecord";
 
 interface RegistrationRecordProps {
   weightRecord: WeightRecord;
@@ -33,11 +33,9 @@ export default ({
           <SpeedIcon />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText
-        primary={`${
-          weightRecord.weight
-        } Kg at ${weightRecord.registrationDate.toLocaleString()}`}
-      />
+      <ListItemText>{`${
+        weightRecord.weight
+      } Kg at ${weightRecord.registrationDate.toLocaleString()}`}</ListItemText>
       <ListItemSecondaryAction>
         <IconButton
           edge="end"

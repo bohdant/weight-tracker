@@ -1,5 +1,5 @@
 import { observable, action } from "mobx";
-import { WeightRecord } from "./weight-store";
+import { WeightRecord } from "../WeightRecord";
 
 export class WeightTrackerUiStore{
     @observable isEditing: boolean = false;

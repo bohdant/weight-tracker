@@ -87,7 +87,7 @@ export default observer(() => {
           }}
         />
       )}
-      <ListItem style={{ height: "3rem" }}>
+      <ListItem key="addNew" style={{ height: "3rem" }}>
         <ListItemText primary={" "}></ListItemText>
         <ListItemSecondaryAction>
           <IconButton
