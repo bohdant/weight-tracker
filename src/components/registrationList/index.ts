@@ -1,1 +1,1 @@
-export {default as default} from './RegistrationListContainer';
+export { default } from "./RegistrationListContainer";

@@ -1,1 +1,1 @@
-export {default as default} from './RegistrationLineChart';
+export { default } from "./RegistrationChartContainer";

@@ -1,11 +1,12 @@
-import { observer } from "mobx-react";
 import React from "react";
 import Chart from "react-google-charts";
-import { useStore } from "../../helpers/store-helpers";
+import WeightRecord from "../../WeightRecord";
 
-export function registrationLineChart() {
-  const { weightStore } = useStore();
-  const { weightRecords } = weightStore;
+export default function registrationLineChart({
+  weightRecords
+}: {
+  weightRecords: WeightRecord[];
+}) {
 
   const chartData = weightRecords.map(item => [
     item.registrationDate,
@@ -40,4 +41,3 @@ export function registrationLineChart() {
   );
 }
 
-export default observer(registrationLineChart);
