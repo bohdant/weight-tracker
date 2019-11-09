@@ -23,37 +23,34 @@ export default ({
   onCancelRemoval
 }: RegistrationRecordRemovingProps) => (
   <>
-    <ListItem key={weightRecord.id}>
-      <ListItemText>
-        <TextField
-          error
-          fullWidth
-          label="Confirmation"
-          id="outlined-margin-normal"
-          defaultValue={`Are you sure to remove the registration at ${weightRecord.registrationDate.toLocaleDateString()}???`}
-          margin="dense"
-          variant="outlined"
-          disabled={true}
-          style={{color:"red"}}
-        />
-      </ListItemText>
-      <ListItemSecondaryAction>
-        <IconButton
-          edge="end"
-          aria-label="confirm"
-          onClick={() => onRemove(weightRecord.id)}
-        >
-          <DoneIcon />
-        </IconButton>
-        <IconButton
-          edge="end"
-          aria-label="cancel"
-          onClick={() => onCancelRemoval(weightRecord.id)}
-        >
-          <ClearIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
-    <Divider />
+    <ListItemText>
+      <TextField
+        error
+        fullWidth
+        label="Confirmation"
+        id="outlined-margin-normal"
+        defaultValue={`Are you sure to remove the registration at ${weightRecord.registrationDate.toLocaleDateString()}???`}
+        margin="dense"
+        variant="outlined"
+        disabled={true}
+        style={{ color: "red" }}
+      />
+    </ListItemText>
+    <ListItemSecondaryAction>
+      <IconButton
+        edge="end"
+        aria-label="confirm"
+        onClick={() => onRemove(weightRecord.id)}
+      >
+        <DoneIcon />
+      </IconButton>
+      <IconButton
+        edge="end"
+        aria-label="cancel"
+        onClick={() => onCancelRemoval(weightRecord.id)}
+      >
+        <ClearIcon />
+      </IconButton>
+    </ListItemSecondaryAction>
   </>
 );

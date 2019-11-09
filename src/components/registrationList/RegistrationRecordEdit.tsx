@@ -33,7 +33,6 @@ export default ({
   temproraryEditingRecord
 }: RegistrationRecordEditProps) => (
   <>
-    <ListItem key={weightRecord.id}>
       <ListItemText>
         <TextField
           label="Weight"
@@ -83,7 +82,5 @@ export default ({
           <ClearIcon />
         </IconButton>
       </ListItemSecondaryAction>
-    </ListItem>
-    <Divider />
   </>
 );

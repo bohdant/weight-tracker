@@ -27,32 +27,29 @@ export default ({
   onRemoveRecord
 }: RegistrationRecordProps) => (
   <>
-    <ListItem key={weightRecord.id}>
-      <ListItemAvatar>
-        <Avatar>
-          <SpeedIcon />
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText>{`${
-        weightRecord.weight
-      } Kg at ${weightRecord.registrationDate.toLocaleString()}`}</ListItemText>
-      <ListItemSecondaryAction>
-        <IconButton
-          edge="end"
-          aria-label="edit"
-          onClick={() => onEditRecord(weightRecord)}
-        >
-          <EditIcon />
-        </IconButton>
-        <IconButton
-          edge="end"
-          aria-label="delete"
-          onClick={() => onRemoveRecord(weightRecord.id)}
-        >
-          <DeleteIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
-    <Divider />
+    <ListItemAvatar>
+      <Avatar>
+        <SpeedIcon />
+      </Avatar>
+    </ListItemAvatar>
+    <ListItemText>{`${
+      weightRecord.weight
+    } Kg at ${weightRecord.registrationDate.toLocaleString()}`}</ListItemText>
+    <ListItemSecondaryAction>
+      <IconButton
+        edge="end"
+        aria-label="edit"
+        onClick={() => onEditRecord(weightRecord)}
+      >
+        <EditIcon />
+      </IconButton>
+      <IconButton
+        edge="end"
+        aria-label="delete"
+        onClick={() => onRemoveRecord(weightRecord.id)}
+      >
+        <DeleteIcon />
+      </IconButton>
+    </ListItemSecondaryAction>
   </>
 );
