@@ -5,15 +5,7 @@ import RegistrationRecordEdit from "./RegistrationRecordEdit";
 import RegistrationRecordRemoving from "./RegistrationRecordRemoving";
 import RegistrationListRecordNew from "./RegistrationListRecordNew";
 import RegistrationRecord from "./RegistrationRecord";
-import {
-  List,
-  ListItem,
-  Divider,
-  ListItemSecondaryAction,
-  IconButton,
-  ListItemText
-} from "@material-ui/core";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
+import { List, ListItem, Divider } from "@material-ui/core";
 
 export default observer(() => {
   const { weightStore, uiStore } = useStore();
@@ -24,7 +16,6 @@ export default observer(() => {
     resetAdding,
     resetEditing,
     resetRemoving,
-    setAddingState,
     setEditingState,
     setRemovingState,
     changeEditingItem,
@@ -63,46 +54,35 @@ export default observer(() => {
                 }}
               />
             )}
-            {!removingId && !editingId && (
+            {removingId !== record.id && editingId !== record.id && (
               <RegistrationRecord
                 weightRecord={record}
                 onRemoveRecord={setRemovingState}
                 onEditRecord={setEditingState}
               />
             )}
-            {isAdding && (
-              <RegistrationListRecordNew
-                weightRecord={{
-                  id: "",
-                  registrationDate: new Date(),
-                  weight: 0
-                }}
-                temproraryEditingRecord={temproraryEditingRecord}
-                onCancelAdding={resetAdding}
-                onChange={(weight, date) => changeEditingItem(weight, date)}
-                onConfirmAdding={(weight, date) => {
-                  addMeasurement(Number(weight), date);
-                  resetAdding();
-                }}
-              />
-            )}
           </ListItem>
           <Divider />
         </>
       ))}
-      <ListItem key="addNew" style={{ height: "3rem" }}>
-        <ListItemText primary={" "}></ListItemText>
-        <ListItemSecondaryAction>
-          <IconButton
-            edge="end"
-            aria-label="delete"
-            size="medium"
-            onClick={setAddingState}
-          >
-            <AddCircleIcon color="primary" fontSize="large" />
-          </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
+      {isAdding && (
+        <ListItem key="new">
+          <RegistrationListRecordNew
+            weightRecord={{
+              id: "",
+              registrationDate: new Date(),
+              weight: 0
+            }}
+            temproraryEditingRecord={temproraryEditingRecord}
+            onCancelAdding={resetAdding}
+            onChange={(weight, date) => changeEditingItem(weight, date)}
+            onConfirmAdding={(weight, date) => {
+              addMeasurement(Number(weight), date);
+              resetAdding();
+            }}
+          />
+        </ListItem>
+      )}
     </List>
   );
 });

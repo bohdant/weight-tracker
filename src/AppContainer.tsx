@@ -9,6 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import RegistrationListContainer from "./components/registrationList";
 import RegistrationChartContainer from "./components/registrationChart";
 import { StoreProvider } from "./helpers/store-helpers";
+import AddRegistration from "./components/addRegistration";
 
 export default function appContainer() {
   return (
@@ -22,11 +23,11 @@ export default function appContainer() {
             </Typography>
           </Toolbar>
         </AppBar>
-        <main style={{padding: "1.5rem"}}>
+        <main style={{ padding: "1.5rem" }}>
           <Container maxWidth="lg">
             <Grid
               container
-              spacing={6}
+              spacing={3}
               direction="row"
               justify="space-around"
               alignItems="center"
@@ -37,9 +38,16 @@ export default function appContainer() {
                 </Paper>
               </Grid>
               <Grid item xs>
-                <Paper>
-                  <RegistrationListContainer />
-                </Paper>
+                <Grid container direction="column" alignItems="flex-end">
+                  <Grid item style={{width: "100%"}}>
+                    <Paper>
+                      <RegistrationListContainer />
+                    </Paper>
+                  </Grid>
+                  <Grid item>
+                    <AddRegistration />
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Container>
